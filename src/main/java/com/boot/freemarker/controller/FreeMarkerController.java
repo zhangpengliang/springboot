@@ -1,6 +1,7 @@
 package com.boot.freemarker.controller;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -11,12 +12,14 @@ import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.xhtmlrenderer.layout.SharedContext;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -64,7 +67,7 @@ public class FreeMarkerController {
 		InputStream is = this.getClass().getClassLoader().getSystemResourceAsStream("img/baobao.jpg");
 		String img = covertPicToBase64(is);
 		map.put("img", img);
-		ExportPdfUtil(response, map, filePath, URLEncoder.encode("测试", "UTF-8") + new Date().getTime() + ".pdf");
+		ExportPdfUtil2(response, map, filePath, URLEncoder.encode("测试", "UTF-8") + new Date().getTime() + ".pdf");
 	}
 
 	/**
@@ -101,6 +104,47 @@ public class FreeMarkerController {
 		renderer.createPDF(out, true);
 		out.flush();
 	}
+	
+	
+	
+	/**
+	 * 方式2
+	 * @param response
+	 * @param map
+	 * @param filePath
+	 * @param fileName
+	 * @throws Exception
+	 * @throws DocumentException
+	 * @throws IOException
+	 */
+	private void ExportPdfUtil2(HttpServletResponse response, ModelMap map, String filePath, String fileName)
+			throws Exception, DocumentException, IOException {
+		if (StringUtils.isEmpty(fileName)) {
+			fileName = "default.pdf";
+		}
+		ITextRenderer renderer = new ITextRenderer();
+		SharedContext sharedContext=renderer.getSharedContext();
+		sharedContext.setReplacedElementFactory(new B64ImgReplacedElementFactory());
+		sharedContext.getTextRenderer().setSmoothingThreshold(0);
+//		javax.xml.parsers.DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//		org.w3c.dom.Document doc = builder.parse(new ByteArrayInputStream(DynamicFtl2Html(map, filePath).getBytes("utf-8")));
+		
+		renderer.setDocumentFromString(DynamicFtl2Html(map, filePath));
+//		renderer.setDocument(doc, null);
+//		renderer.getSharedContext().setBaseURL("");
+		// 解决中文支持问题
+		ITextFontResolver fontResolver = renderer.getFontResolver();
+		// 设置字体
+		fontResolver.addFont("/templates/simsun.ttc", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+		response.setCharacterEncoding("utf-8");
+		ServletOutputStream out = response.getOutputStream();
+		renderer.layout();
+		renderer.createPDF(out, true);
+		out.flush();
+	}
+	
 
 	/**
 	 * 动态ftl模板输出为静态html
