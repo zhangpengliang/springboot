@@ -1,4 +1,4 @@
-package com.boot.freemarker.controller;
+/*package com.boot.freemarker.controller;
 
 import java.io.IOException;
 import org.w3c.dom.Element;
@@ -12,13 +12,10 @@ import org.xhtmlrenderer.pdf.ITextImageElement;
 import org.xhtmlrenderer.render.BlockBox;
 import org.xhtmlrenderer.simple.extend.FormSubmissionListener;
 
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.Image;
-import com.lowagie.text.pdf.codec.Base64;
 
 public class B64ImgReplacedElementFactory implements ReplacedElementFactory {
 
-	/**
+	*//**
 	 * 实现createReplacedElement 替换html中的Img标签
 	 * 
 	 * @param c
@@ -32,7 +29,7 @@ public class B64ImgReplacedElementFactory implements ReplacedElementFactory {
 	 * @param cssHeight
 	 *            css高
 	 * @return ReplacedElement
-	 */
+	 *//*
 	public ReplacedElement createReplacedElement(LayoutContext c, BlockBox box, UserAgentCallback uac, int cssWidth,
 			int cssHeight) {
 		Element e = box.getElement();
@@ -64,7 +61,7 @@ public class B64ImgReplacedElementFactory implements ReplacedElementFactory {
 		return null;
 	}
 
-	/**
+	*//**
 	 * 将base64编码解码并生成itext图像
 	 * 
 	 * @param srcAttr
@@ -76,7 +73,7 @@ public class B64ImgReplacedElementFactory implements ReplacedElementFactory {
 	 *             io异常
 	 * @throws BadElementException
 	 *             BadElementException
-	 */
+	 *//*
 	protected FSImage buildImage(String srcAttr, UserAgentCallback uac) throws IOException, BadElementException {
 		FSImage fsImage;
 		if (srcAttr.startsWith("data:image/")) {
@@ -91,27 +88,27 @@ public class B64ImgReplacedElementFactory implements ReplacedElementFactory {
 		return fsImage;
 	}
 
-	/**
+	*//**
 	 * 实现remove
 	 * 
 	 * @param e
 	 *            元素
-	 */
+	 *//*
 	public void remove(Element e) {
 	}
 
-	/**
+	*//**
 	 * 实现reset
-	 */
+	 *//*
 	public void reset() {
 	}
 
-	/**
+	*//**
 	 * 实现setFormSubmissionListener
 	 * 
 	 * @param formsubmissionlistener
 	 *            监听
-	 */
+	 *//*
 	public void setFormSubmissionListener(FormSubmissionListener formsubmissionlistener) {
 	}
-}
+}*/

@@ -1,42 +1,273 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background: #fff;">
 <head>
-    <meta charset="UTF-8"></meta>
-    <title>Title</title>
-    <style>  
-		body{  
-   			 font-family: SimSun;  
-		}  
-</style> 
+  <meta charset="UTF-8"></meta>
+  <title>anlle-推荐报告模板</title>
+    <style>
+      body{  
+        font-family: SimHei;  
+      }  
+      @page {
+        size: A4;
+        margin: 50px 0 50px 0;
+      }
+      @page:first{margin:0 0 50px 0;}
+    </style>
 </head>
-<body>
-	this is index page！name:${name},sex:
-						<#if sex = 1 >
-									男
-						<#else>
-									女
-						</#if>
- 	<div style="heigth:30px;width:250px">
-		<img  style="float: left;margin-top:15px;width:250px;height:40px"  src="http://pic29.nipic.com/20130601/12122227_123051482000_2.jpg"></img>
- 	</div>
- 	<img style="float: left;margin-top:15px;width:250px;height:40px" 
-			src="data:image/png;base64,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"
-			/>
-  	<!--<div style="height:70px;margin:0 10px ">
-            <h4 style="float:right;margin-top:45px;font-family:SimSun">机遇成就价值</h4>
-    </div>-->
-  
-  <!-- 1、导出使用网络上的图片连接可以直接下载显式，2、使用base64不行,必须使用绝对路径,但是这样html页面展示就没法展示了。-->
-   <img style="float: left;margin-top:15px;width:250px;height:40px" 
-			src="file:///C:/java/workspace/boot-demo/target/classes/img/baobao.jpg"/>
-
-	<div>
-		freemarker的内置函数：${func}
-	</div>		
-	
-			
-			
-			
- 
+<body style="margin: 0;background: #fff;">
+<div style="width: 820px;background-color: #fff;">
+  <!--header-->
+  <div style="position: relative;height: 190px;">
+    <div style="width: 100%;height: 80px;border: 1px dashed #eee;">
+      <img src="./img/vista.png" alt="" width="116" height="48" style="position: absolute;top: 22px;left: 44px;"></img>
+      <p style="position: absolute;top: 22px;right: 55px;font-size: 12px;color: #222;">
+        推荐顾问：戴娟-18210276539 <span style="margin-left: 15px;">2019/03/04</span>
+      </p>
+    </div>
+    <div style="height: 94px;text-align: center;overflow: hidden;margin-top: 25px;">
+      <img src="./img/top_title.png" width="245" height="29" style="position: relative;top: 0;left: 0;"></img>
+      <p style="font-size: 12px;color: #222;margin-top: 10px;">推荐职位：<span>软件开发工程师（上海）</span></p>
+      <img src="./img/anlle.jpg" alt="" width="90" height="90" style="position: absolute;top: 92px;right: 180px;"></img>
+    </div>
+  </div>
+  <!--base-->
+  <div style="margin: 0 110px 0 72px;position: relative;overflow: hidden;">
+    <img src="./img/base_title.png" width="690" height="36"></img>
+    <div style="margin: 0 0 34px 28px;overflow: hidden;">
+      <div style="width: 308px;font-size: 16px;color: #333;float: left;">
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">姓名：</span>
+          <span style="display:block; width: 170px;float: left;padding-left: 10px;">李小林</span>
+        </p>
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">年龄：</span>
+          <span style="display:block; width: 170px;float: left;padding-left: 10px;">28岁</span>
+        </p>
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">所在城市：</span>
+          <span style="display:block; width: 170px;float: left;padding-left: 10px;">北京市-丰台市</span>
+        </p>
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">户籍地址：</span>
+          <span style="display:block; width: 170px;float: left;padding-left: 10px;">北京市-丰台市</span>
+        </p>
+      </div>
+      <div style="width: 196px;font-size: 16px;color: #333;float: left;">
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">性别：</span>
+          <span style="display:block; width: 102px;float: left;padding-left: 10px;">男</span>
+        </p>
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">婚姻状态：</span>
+          <span style="display:block; width: 102px;float: left;padding-left: 10px;">未婚</span>
+        </p>
+        <p style="line-height: 40px;">
+          <span style="display:block; width: 80px;float: left;text-align: right;">工作年限：</span>
+          <span style="display:block; width: 102px;float: left;padding-left: 10px;">7年</span>
+        </p>
+      </div>
+      <div style="margin-top: 15px;float:right;">
+        <img src="./img/img_head.png" alt="" width="106" height="106"></img>
+      </div>
+    </div>
+  </div>
+  <!--present-->
+  <div style="margin: 0 110px 0 72px;overflow: hidden;">
+    <img src="./img/present_title.png" width="690" height="36"></img>
+    <table cellspacing="0" cellpadding="0" style="width: 620px;font-size: 16px;margin: 20px 40px 20px 14px;">
+      <tbody>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">目前年薪：</td>
+        <td style="width: 178px;">168000 (税前)</td>
+        <td style="width: 90px;text-align: center;vertical-align: top;">希望薪资：</td>
+        <td style="width: 178px;">24800</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">上岗时间：</td>
+        <td style="width: 178px;">一个月之内</td>
+        <td style="width: 90px;text-align: center;vertical-align: top;">面试时间：</td>
+        <td style="width: 178px;">随时都可面</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">薪酬结构：</td>
+        <td colspan="3" style="width: 178px;">360000=20k*18个月（1、基本工资12个月；2、目前公司奖金占比较大，平均6个月）</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">核心优势：</td>
+        <td colspan="3"  style="width: 178px;">
+          1、一年半“2345”输入法研发经验，涉及内核算法、客户端、输入法后台
+          2、学习欲望强，目前兼职为优达机器学习助教</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">职业经历：</td>
+        <td colspan="3" style="width: 178px;">候选人5年工作经验，先后就职3家企业，工程化RD起家，目前从事机器学习算法工程师
+          1、毕业后首年处理家中事务，未工作
+          2、2年工程化rd
+          3、1年半“2345”输入法研发，初期做客户端研发，后进行内核算法开发
+          4、至今通过机器学习进行数据挖掘</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">专业能力：</td>
+        <td colspan="3" style="width: 178px;">候选人具备内核算法的研发能力，熟悉NLP在输入法的应用</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td  style="width: 90px;text-align: center;vertical-align: top;">职业发展：</td>
+        <td colspan="3" style="width: 178px;">候选人希望继续在NLP方向发展</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">职业意向：</td>
+        <td colspan="3" style="width: 178px;">1、候选人对公司的职位非常感兴趣
+          2、下一份工作，希望在技术氛围浓厚的公司工作</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">性格特点：</td>
+        <td colspan="3" style="width: 178px;">候选人热情、自信、诚恳，沟通能力极强</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td  style="width: 90px;text-align: center;vertical-align: top;">家庭情况：</td>
+        <td colspan="3" style="width: 178px;">候选人目前未婚，目前居住地距离章鱼2km</td>
+      </tr>
+      <tr style="height: 40px;line-height: 40px;">
+        <td style="width: 90px;text-align: center;vertical-align: top;">已有offer：</td>
+        <td colspan="3" style="width: 178px;">手中已有两家offer，正在对比</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--education-->
+  <div style="margin: 0 110px 0 72px;position: relative;overflow: hidden;line-height:30px;">
+    <img src="./img/edu_title.png" width="690" height="36"></img>
+    <div style="margin: 0 0  0 15px;">
+      <div style="margin: 20px 0 30px 10px;">
+        <div style="color: #333;position: relative;margin-left: 6px; font-size: 18px;">
+          <img src="./img/img_square.png" alt="" width="8" height="8" style="position: absolute;top: 10px;left: -12px;"></img>
+          <b>2008.09-2012.06</b>
+          <b style="margin-left: 10px;">东华理工大学</b>
+        </div>
+        <div style="margin-top: 8px;color: #333;margin-left: 6px;font-size: 16px;">
+          本科 | 统招
+          <span style="margin-left: 24px;">软件工程</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--work-->
+  <div style="margin: 0 110px 0 72px;position: relative;min-height: 100px;overflow: hidden;line-height: 30px">
+    <img src="./img/work_title.png" width="690" height="36"></img>
+    <div style="margin: 0 0  0 15px;">
+      <div style="margin: 20px 0 30px 10px;">
+        <div style="position: relative;">
+          <img src="./img/img_square.png" alt="" width="8" height="8" style="position: absolute;top: 10px;left: -12px;"></img>
+          <b style="color: #333;font-size: 18px;position: relative;">2017.08-至今</b>
+          <span  style="margin-left: 14px;color: #999;font-size: 16px;">(1年5个月)</span>
+        </div>
+        <div  style="font-size: 18px; color: #333;margin-top: 10px;">
+          <b>高晟财富(北京)投资管理有限公司</b>
+          <span style="margin-left: 15px;">工程师部长</span>
+        </div>
+        <div style="width: 618px;margin: 8px 0 10px;font-size: 16px;color: #333;">
+          平安普惠是中国平安保险（集团）有限公司旗下成员，以创新的科技，和卓越客户体验，为广大个人和小微型企业提供专业的贷款服务，助力中国实体经济发展
+        </div>
+        <div style="font-size: 16px;color: #333;">
+          <b>工作关系：</b>
+          <ul style="width: 100%;height: 30px;margin: 8px 0 15px -40px;">
+            <li style="float: left;width: 32%;list-style: none;">
+              <span>所属部门：</span>
+              <span>研发部</span>
+            </li>
+            <li style="width: 32%;float: left;list-style: none;">
+              <span>汇报对象：</span>
+              <span>总经理</span>
+            </li>
+            <li style="width: 32%;float: left;list-style: none;">
+              <span>下属人数：</span>
+              <span>2</span>
+            </li>
+          </ul>
+        </div>
+        <div style="font-size: 16px;color: #333;">
+          <b>工作职责：</b>
+          <div style="margin: 8px 0 15px 0;color: #333;">
+            1、AI电销机器人的实现
+            2、kyc存量客户经营，通过模型预测最有可能二次销售的成功的客户
+            3、销售人员地理展业地点的挖掘与分析，输出展业地图给销售人员
+            4、数据平台的搭建与数据接入分析
+          </div>
+        </div>
+        <div style="font-size: 16px; color: #333;">
+          <b>工作业绩：</b>
+          <p style="margin: 8px 0 15px 0;">AI电销机器人项目已成功上线，预计未来会初步削减50%的前端销售人员</p>
+        </div>
+        <div style="font-size: 16px;margin-bottom: 16px;color: #333;">
+          <b>求职动机：</b>
+          <p style="margin-top: 8px;">希望更好的技术氛围，做更挑战的事情</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--project-->
+  <div style="margin: 0 110px 0 72px;position: relative;min-height: 100px;overflow: hidden;line-height: 30px">
+    <img src="./img/pro_title.png" width="690" height="36"></img>
+    <div  style="margin: 0 0 0 15px;">
+      <div  style="margin: 20px 0 30px 10px;">
+        <div style="margin-bottom: 5px;color: #333;font-size: 18px;position: relative;">
+          <img src="./img/img_square.png" alt="" width="8" height="8" style="position: absolute;top: 10px;left: -12px;"></img>
+          <b  style="position: relative;">2018.08-至今</b>
+          <b style="margin-left: 10px;">电销机器人</b>
+        </div>
+        <div style="margin: 8px 0 15px;font-size: 16px;color: #333;line-height: 30px;">使用AI电销机器人替代人工，实现普惠前端电销的完整流程，主要包括客户的相关资质确定，个人信息和贷款意愿的提取</div>
+        <div style="font-size: 16px;">
+          <b style="color: #333;">项目职责：</b>
+          <div style="margin: 8px 0 15px 0;color: #333;line-height: 30px;">
+            1、搜集坐席与客户的录音文件，基于转写的文本文件使用无监督的一些算法提取出不同场景下客户的回答内容，并进行归类总结出相关的意图
+            2、基于规则对客户的回答进行分类，并且打标
+            3、对打标好的数据(人工打标和正则打标)使用LSTM建模，使用模型替代规则识别客户的意图
+            4、建立知识库，针对客户的开放式问题选择知识库最接近的答案进行回答
+          </div>
+        </div>
+        <div style="font-size: 16px;">
+          <b style="color: #333;">项目业绩：</b>
+          <p style="color: #333;margin: 8px 0 15px 0;">项目已经正式上线，预计未来会初步削减50%的前端销售人员</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--train-->
+  <div style="margin: 0 110px 0 72px;position: relative;min-height: 100px;overflow: hidden;line-height: 30px;">
+    <img src="./img/train_title.png" width="690" height="36"></img>
+    <div  style="margin: 0 0 0 15px;">
+      <div style="margin: 20px 0 30px 10px;">
+        <div style="margin-bottom: 5px;color: #333;font-size: 18px;position: relative;">
+          <img src="./img/img_square.png" alt="" width="8" height="8" style="position: absolute;top: 10px;left: -12px;"></img>
+          <b  style="position: relative;">2004.09-2007.07</b>
+          <b style="margin-left: 10px;">携程同-携程主站动态打通</b>
+        </div>
+        <div style="font-size: 16px;color: #333;margin-top: 10px;">
+          <div style="width: 630px;line-height:30px;">
+            <div style="width: 307px;display:inline-block;vertical-align: top;">
+              <span style="width: 82px;display: table-cell;">培训证书：</span>
+              <span style="display: table-cell;">PMP证书</span>
+            </div>
+            <div style="width: 307px;display:inline-block;vertical-align: top;">
+              <span style="width: 82px;display: table-cell;">培训机构：</span>
+              <span style="display: table-cell;">尚德机构</span>
+            </div>
+          </div>
+          <div style="line-height: 30px;">培训地点：北京</div>
+          <div style="line-height: 30px;">培训描述：<span>通过项目管理协会培训，掌握项目管理相关技能</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--language-->
+  <div style="margin: 0 110px 0 72px;overflow: hidden;line-height: 30px">
+    <img src="./img/language_title.png" width="690" height="36"></img>
+    <div style="margin: 0 0 0 15px;">
+      <div style="margin: 20px 0 30px 10px;">
+        <p style="font-size: 16px;color: #333;">英语、普通话、粤语、潮汕话</p>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
