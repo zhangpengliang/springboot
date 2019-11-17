@@ -13,32 +13,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.bean.User;
 import com.boot.config.DataSourceRouting;
-import com.boot.mapper.IUserDao;
+import com.boot.mapper.first.IUserDao;
+import com.boot.mapper.second.IUserDao2;
 
 @RestController
 @RequestMapping("/data")
 public class DataSourceController {
 
-	@Resource
-	private SqlSessionFactory sqlSessionFactory;
+//	@Resource
+//	private SqlSessionFactory sqlSessionFactory;
 	@Resource
 	private IUserDao userDao;
+	@Resource
+	private IUserDao2 userDao2;
 
-	@RequestMapping("/swith.json")
-	public void dataSwitch() {
-		DataSourceRouting.setMasterDataSource();
-		try {
-			Connection conenction = sqlSessionFactory.openSession().getConnection();
-			DataSourceRouting.setSubDataSource();
-			Connection conenction2 = sqlSessionFactory.openSession().getConnection();
-			System.out.println(conenction.getMetaData().getUserName());
-			System.out.println(conenction.getCatalog()); // 数据库名称
-			System.out.println(conenction2.getMetaData().getUserName());
-			System.out.println(conenction2.getCatalog()); // 数据库名称
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	@RequestMapping("/swith.json")
+//	public void dataSwitch() {
+//		DataSourceRouting.setMasterDataSource();
+//		try {
+//			Connection conenction = sqlSessionFactory.openSession().getConnection();
+//			DataSourceRouting.setSubDataSource();
+//			Connection conenction2 = sqlSessionFactory.openSession().getConnection();
+//			System.out.println(conenction.getMetaData().getUserName());
+//			System.out.println(conenction.getCatalog()); // 数据库名称
+//			System.out.println(conenction2.getMetaData().getUserName());
+//			System.out.println(conenction2.getCatalog()); // 数据库名称
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@RequestMapping("/insert.json")
 	public void insert() {
@@ -52,11 +55,11 @@ public class DataSourceController {
 		for (User u : list) {
 			Integer userId = u.getUserId();
 			if (userId % 2 == 0) {
-				DataSourceRouting.setSubDataSource();
+				userDao.insert(u);
 			} else {
-				DataSourceRouting.setMasterDataSource();
+				userDao2.insert(u);
 			}
-			userDao.insert(u);
+
 		}
 	}
 

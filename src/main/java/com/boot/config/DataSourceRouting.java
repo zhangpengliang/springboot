@@ -34,4 +34,12 @@ public class DataSourceRouting extends AbstractRoutingDataSource {
 	public static void setSubDataSource() {
 		localContext.set(DATA_SOURCE_SUB);
 	}
+
+	public static void setDataSource(String name) {
+		localContext.set(name);
+	}
+
+	public static void clearDataSource() {
+		localContext.remove();
+	}
 }
